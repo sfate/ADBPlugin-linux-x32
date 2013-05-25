@@ -1,0 +1,21 @@
+{
+  "name": "ADB",
+  "version": "0.0.1",
+  "description": "ADB Plugin",
+  "manifest_version": 2,
+
+  "background": {
+    "page":"background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/off_19.png",
+      "38": "assets/images/off_38.png"
+    },
+    "default_title": "Start ADB",
+    "default_popup": "popup.html"
+  },
+  "plugins": [
+    { "path": "plugin/np_adb_wrapper.so", "public": true }
+  ]
+}
