@@ -7,7 +7,7 @@ var plugin = document.getElementById('adb-plugin');
 chrome.browserAction.setBadgeBackgroundColor({color: '#070'});
 
 function update(oneTime) {
-  if (plugin.isServerRunning()) {
+  if (isServerRunning()) {
     chrome.browserAction.setIcon({
       path: {
         19: 'assets/images/on_19.png',
@@ -52,7 +52,7 @@ function stop() {
 }
 
 function isServerRunning() {
-  return plugin.isServerRunning();
+  return ('isServerRunning' in plugin) && plugin.isServerRunning();
 }
 
 function devices() {

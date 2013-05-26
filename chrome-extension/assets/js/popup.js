@@ -1,8 +1,9 @@
-var devices = document.getElementById('devices');
-var start = document.getElementById('start');
-var stop = document.getElementById('stop');
+var start = document.getElementById('start'),
+    stop  = document.getElementById('stop'),
+   plugin = chrome.extension.getBackgroundPage(),
+  devices = document.getElementById('devices');
 
-if (chrome.extension.getBackgroundPage().isServerRunning()) {
+if (plugin.isServerRunning()) {
   start.classList.add('disabled');
 } else {
   devices.classList.add('disabled');
@@ -12,20 +13,20 @@ if (chrome.extension.getBackgroundPage().isServerRunning()) {
 devices.addEventListener('click', function () {
   if (devices.classList.contains('disabled'))
     return;
-  chrome.extension.getBackgroundPage().devices();
+  plugin.devices();
   window.close();
 }, false);
 
 start.addEventListener('click', function () {
   if (start.classList.contains('disabled'))
     return;
-  chrome.extension.getBackgroundPage().start();
+  plugin.start();
   window.close();
 }, false);
 
 stop.addEventListener('click', function () {
   if (stop.classList.contains('disabled'))
     return;
-  chrome.extension.getBackgroundPage().stop();
+  plugin.stop();
   window.close();
 }, false);

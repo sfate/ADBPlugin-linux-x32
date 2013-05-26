@@ -16,6 +16,6 @@
     "default_popup": "popup.html"
   },
   "plugins": [
-    { "path": "plugin/np_adb_wrapper.so", "public": true }
+    { "path": "plugin/npADBPlugin.so", "public": true }
   ]
 }

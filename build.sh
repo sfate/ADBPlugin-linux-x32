@@ -3,12 +3,8 @@
 set -e
 
 PRJ_DIR=$(pwd -P)
-EXT_DIR="$PWD/chrome-extension-unpacked"
+EXT_DIR="$PWD/chrome-extension"
 EXT_PEM="$EXT_DIR.pem"
-
-cd "$EXT_DIR/plugin/src" && make
-cp "$EXT_DIR/plugin/src/np_adb_wrapper.so" "$EXT_DIR/plugin/np_adb_wrapper.so"
-make clean
 
 name="npADBPlugin-linux-x32"
 crx="$name.crx"
