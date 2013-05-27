@@ -2,18 +2,24 @@
 
 set -e
 
-PRJ_DIR=$(pwd -P)
-EXT_DIR="$PWD/chrome-extension"
+FIREBREATH_FULL_PATH=$1
+PROJECT_ROOT_DIR="$PWD"
+
+$FIREBREATH_FULL_PATH/prepmake.sh $PROJECT_ROOT_DIR/plugin-src/ADBPlugin
+cd $FIREBREATH_FULL_PATH/build/projects/ADBPlugin/ && make
+cp $FIREBREATH_FULL_PATH/build/bin/ADBPlugin/npADBPlugin.so $PROJECT_ROOT_DIR/chrome-extension/plugin/npADBPlugin.so
+
+EXT_DIR="$PROJECT_ROOT_DIR/chrome-extension"
 EXT_PEM="$EXT_DIR.pem"
 
 name="npADBPlugin-linux-x32"
-crx="$name.crx"
-pub="$name.pub"
-sig="$name.sig"
-zip="$name.zip"
+crx="$PROJECT_ROOT_DIR/$name.crx"
+pub="$PROJECT_ROOT_DIR/$name.pub"
+sig="$PROJECT_ROOT_DIR/$name.sig"
+zip="$PROJECT_ROOT_DIR/$name.zip"
 trap 'rm -f "$pub" "$sig" "$zip"' EXIT
 
-(cd "$EXT_DIR" && zip -qr -9 -X "$PRJ_DIR/$zip" .)
+(cd "$EXT_DIR" && zip -qr -9 -X "$zip" .)
 
 cd $PRJ_DIR && openssl genrsa -out "$EXT_PEM" 1024
 openssl sha1 -sha1 -binary -sign "$EXT_PEM" < "$zip" > "$sig"
@@ -31,7 +37,8 @@ sig_len_hex=$(byte_swap $(printf '%08x\n' $(ls -l "$sig" | awk '{print $5}')))
 (
   echo "$crmagic_hex $version_hex $pub_len_hex $sig_len_hex" | xxd -r -p
   cat "$pub" "$sig" "$zip"
-) > "$PRJ_DIR/$crx"
+) > "$crx"
 echo "Wrote $crx"
+rm $EXT_PEM
 
 exit 0

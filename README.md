@@ -9,10 +9,13 @@ ADB Plugin is a Chrome Extension that runs ADB daemon and enables remote debuggi
 
 ## How to build on Linux(x32)
 - Get FireBreath at http://www.firebreath.org/display/documentation/Download
-- Run `$FIREBREATH_FULL_PATH/prepmake.sh $PROJECT_ROOT_DIR/chrome-extension/plugin/src/ADBPlugin`
-- Then compile it into a lib: `cd $FIREBREATH_FULL_PATH/build/projects/ADBPlugin/ && make`
-- Copy lib into extentions folder: `cp $FIREBREATH_FULL_PATH/build/bin/ADBPlugin/npADBPlugin.so $PROJECT_ROOT_DIR/chrome-extension/plugin/npADBPlugin.so`
-- Navigate to `$PROJECT_ROOT_DIR` and run `chmod +x build.sh && ./build.sh`
+- Navigate to project root directory and build package:
+
+```bash
+# Note: $PROJECT_ROOT_DIR and $FIREBREATH_FULL_PATH should be complete paths
+cd $PROJECT_ROOT_DIR && chmod +x build.sh
+./build.sh $FIREBREATH_FULL_PATH
+```
 - Complete extention will be available at the project root directory by name `npADBPlugin-linux-x32.crx`
 
 ## Architecture
