@@ -44,6 +44,7 @@ function update(oneTime) {
 update();
 
 function start() {
+  plugin.setAttribute('data-local-port',null);
   setTimeout(function() { plugin.startServer(); });
 }
 
@@ -56,5 +57,19 @@ function isServerRunning() {
 }
 
 function devices() {
-  chrome.tabs.create({url:'chrome://inspect'});
+  var port = getCurrentPort();
+  var url  = (port ? 'localhost:'+port : 'chrome://inspect');
+  chrome.tabs.create({url:url});
 }
+
+function forward(port) {
+  if (port != getCurrentPort()) {
+    plugin.setAttribute('data-local-port', port.toString());
+    plugin.forward(port);
+  }
+}
+
+function getCurrentPort() {
+  return plugin.getAttribute('data-local-port');
+}
+
