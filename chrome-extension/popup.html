@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="UTF-8" />
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -7,6 +8,14 @@
   <div class="separator"></div>
   <div id="start" class="item">Start ADB</div>
   <div id="stop" class="item">Stop ADB</div>
+  <div class="separator"></div>
+  <div id="forward" class="item-no-hover">
+    <span id='text'>Forward<span>
+    <div id="note" class='hidden'>Invalid number. E.g. 9222</div>
+    <form id='form'>
+      <input type='tel' name='port' size='3' pattern="[0-9]{4}" placeholder='Port'><input type="submit" value="√"><input type="reset" value="✖">
+    <form>
+  </div>
   <script type="text/javascript" src="assets/js/popup.js"></script>
 </body>
 </html>
