@@ -2,8 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-var plugin = document.getElementById('adb-plugin'),
-    storageArea = chrome.storage.sync;
+var plugin = document.getElementById('adb-plugin');
 
 chrome.browserAction.setBadgeBackgroundColor({color: '#070'});
 
@@ -45,11 +44,11 @@ function update(oneTime) {
 update();
 
 function start() {
+  plugin.removeAttribute('data-local-port');
   setTimeout(function() { plugin.startServer(); });
 }
 
 function stop() {
-  storageArea.remove('local-port');
   setTimeout(function() { plugin.killServer(); });
 }
 
@@ -58,22 +57,19 @@ function isServerRunning() {
 }
 
 function devices() {
-  var port = currentPort();
+  var port = getCurrentPort();
   var url  = (port ? 'localhost:'+port : 'chrome://inspect');
   chrome.tabs.create({url:url});
 }
 
 function forward(port) {
-  var oldPort = currentPort();
-  if (port != oldPort) {
-    storageArea.set({'local-port': port});
+  if (port != getCurrentPort()) {
+    plugin.setAttribute('data-local-port', port);
     plugin.forward(port);
   }
 }
 
-function currentPort() {
-  var port;
-  storageArea.get('local-port', function(result){ port = result['local-port'] });
-  return port;
+function getCurrentPort() {
+  return plugin.getAttribute('data-local-port');
 }
 

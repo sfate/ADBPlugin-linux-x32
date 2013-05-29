@@ -12,13 +12,13 @@ if (plugin.isServerRunning()) {
 } else {
   devices.classList.add('disabled');
   stop.classList.add('disabled');
-  /* forward.classList.add('disabled'); */
+  forward.classList.add('disabled');
 }
 
-if (plugin.currentPort()) {
-  this.querySelector('input[type="submit"]').disabled = true;
-  this.querySelector('input[name="port"]').disabled = true;
-  this.querySelector('input[name="port"]').value = plugin.currentPort();
+if (plugin.getCurrentPort()) {
+  form.querySelector('input[type="submit"]').disabled = true;
+  form.querySelector('input[name="port"]').disabled = true;
+  form.querySelector('input[name="port"]').value = plugin.getCurrentPort();
 }
 
 devices.addEventListener('click', function () {
@@ -54,7 +54,7 @@ form.onsubmit = function() {
   if (port) {
     this.querySelector('input[type="submit"]').disabled = true;
     this.querySelector('input[name="port"]').disabled = true;
-    // plugin.forward(port);
+    plugin.forward(port);
   }
   return false;
 };

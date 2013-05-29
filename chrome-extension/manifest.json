@@ -17,8 +17,5 @@
   },
   "plugins": [
     { "path": "plugin/npADBPlugin.so", "public": true }
-  ],
-  "permissions": [
-    "storage"
   ]
 }
