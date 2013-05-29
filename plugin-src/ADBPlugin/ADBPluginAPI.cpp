@@ -30,6 +30,11 @@ FB::variant ADBPluginAPI::devices()
     return adb("devices");
 }
 
+FB::variant ADBPluginAPI::forward(const std::string& port)
+{
+    return adb("forward tcp:" + port + " localabstract:chrome_devtools_remote");
+}
+
 std::string ADBPluginAPI::shell(const std::string& command)
 {
     FILE * pPipe;

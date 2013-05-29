@@ -44,7 +44,7 @@ function update(oneTime) {
 update();
 
 function start() {
-  plugin.removeAttribute('data-local-port');
+  plugin.setAttribute('data-local-port',null);
   setTimeout(function() { plugin.startServer(); });
 }
 
@@ -64,7 +64,7 @@ function devices() {
 
 function forward(port) {
   if (port != getCurrentPort()) {
-    plugin.setAttribute('data-local-port', port);
+    plugin.setAttribute('data-local-port', port.toString());
     plugin.forward(port);
   }
 }

@@ -13,6 +13,9 @@ if (plugin.isServerRunning()) {
   devices.classList.add('disabled');
   stop.classList.add('disabled');
   forward.classList.add('disabled');
+  form.querySelector('input[type="submit"]').disabled = true;
+  form.querySelector('input[type="reset"]').disabled = true;
+  form.querySelector('input[name="port"]').disabled = true;
 }
 
 if (plugin.getCurrentPort()) {
